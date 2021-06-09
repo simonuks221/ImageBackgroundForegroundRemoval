@@ -11,13 +11,13 @@ const SelectImageDisplay = ({capturedImage, imageFileSelected, doneButtonPressed
                     </div>
                     <div className = 'row'>
                         <h5 className = 'col text-light text-end'>Remove: </h5>
-                        <select className = 'col'>
+                        <select className = 'col' id = 'removalSelect'>
                             <option>Background</option>
                             <option>Foreground</option>
                         </select>
                     </div>
                     <div className = 'row'>
-                        <button  className = {imageState === 1? 'btn btn-primary disabled': 'btn btn-primary'} onClick = {doneButtonPressed}>Done</button>
+                        <button  className = {imageState === 1? 'btn btn-primary disabled': 'btn btn-primary'} onClick = {() => {doneButtonPressed(document.getElementById('removalSelect'))}}>Done</button>
                     </div>
                 </div>
                 <div className = 'col-8'>
