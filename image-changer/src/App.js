@@ -30,9 +30,11 @@ function App() {
     setImageState(ImageStateEnum.processing)
     const data = await fetchChangedImage(removal)
     if(data.ok){
+      console.log(data)
+      const dataaa = await data.json()
+      console.log(dataaa)
       setImageState(ImageStateEnum.changed)
-      setChangedImage(data)
-      console.log("changed")
+      setChangedImage(dataaa.data.result_b64)
     }else{
       setImageState(ImageStateEnum.notSelected)
       setChangedImage('')
@@ -41,10 +43,10 @@ function App() {
   }
 
   const fetchChangedImage = async(removal) => {
-    console.log(config.API_KEY)
     const options = {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'X-Api-Key': config.API_KEY,
         'format': 'png'
@@ -52,9 +54,11 @@ function App() {
       body: JSON.stringify({image_file_b64: capturedImage, size: 'auto'})
     }
     const res = await fetch('https://api.remove.bg/v1.0/removebg', options)
+
     console.log(res)
     //const data = await res.json()
     return res
+    //return res
   }
 
   return (
